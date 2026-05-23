@@ -1,16 +1,14 @@
+
 "use client";
 
 import React, { useState, useRef, useCallback } from 'react';
 import { Wheel } from './Wheel';
-import { SegmentManager } from './SegmentManager';
-import { History } from './History';
 import { WheelSegment, SpinResult } from '@/lib/types';
 import { Button } from '@/components/ui/button';
-import { Trophy, Dices } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+import { Star, Trophy, RefreshCcw } from 'lucide-react';
 
-const DEFAULT_SEGMENTS: WheelSegment[] = [
-  { id: '1', label: 'R$ 1.000', subLabel: 'GRANDE PRÊMIO', weight: 1, color: '#D4A24C' },
+const AURORA_SEGMENTS: WheelSegment[] = [
+  { id: '1', label: 'R$ 1.000 (GRANDE PRÊMIO)', weight: 1, color: '#D4A24C' },
   { id: '2', label: 'Não foi dessa vez', weight: 1, color: '#0F0608' },
   { id: '3', label: 'R$ 50', weight: 1, color: '#5C0A1A' },
   { id: '4', label: 'Tentar Novamente', weight: 1, color: '#3B0F1A' },
@@ -25,111 +23,118 @@ const DEFAULT_SEGMENTS: WheelSegment[] = [
 ];
 
 export const RouletteGame = () => {
-  const [segments, setSegments] = useState<WheelSegment[]>(DEFAULT_SEGMENTS);
-  const [history, setHistory] = useState<SpinResult[]>([]);
   const [isSpinning, setIsSpinning] = useState(false);
   const [winner, setWinner] = useState<WheelSegment | null>(null);
   const targetAngleRef = useRef(0);
   const currentRotationRef = useRef(0);
-  const { toast } = useToast();
 
   const handleSpin = useCallback(() => {
-    if (isSpinning || segments.length < 2) {
-      if (segments.length < 2) {
-        toast({ variant: "destructive", title: "Atenção", description: "Adicione pelo menos 2 segmentos para girar." });
-      }
-      return;
-    }
+    if (isSpinning) return;
 
     setWinner(null);
     setIsSpinning(true);
 
-    // Calculate a random target angle (at least 5 full rotations + random offset)
-    const extraRotations = 8 + Math.floor(Math.random() * 5);
-    const randomOffset = Math.floor(Math.random() * 360);
-    const newTarget = currentRotationRef.current + (extraRotations * 360) + randomOffset;
+    const extraRotations = 10;
+    const randomSegmentIndex = Math.floor(Math.random() * AURORA_SEGMENTS.length);
+    const segmentAngle = 360 / AURORA_SEGMENTS.length;
+    const targetSegmentAngle = (randomSegmentIndex * segmentAngle) + (segmentAngle / 2);
+    
+    // Calculate new rotation to land exactly on the segment
+    // normalized target = (360 - targetSegmentAngle)
+    const newTarget = currentRotationRef.current + (extraRotations * 360) + (360 - (currentRotationRef.current % 360)) + (360 - targetSegmentAngle);
     
     targetAngleRef.current = newTarget;
     currentRotationRef.current = newTarget;
-  }, [isSpinning, segments.length, toast]);
+  }, [isSpinning]);
 
   const onResult = useCallback((segment: WheelSegment) => {
     setWinner(segment);
-    const newResult: SpinResult = {
-      id: Math.random().toString(36).substr(2, 9),
-      segmentId: segment.id,
-      label: segment.label,
-      timestamp: Date.now(),
-    };
-    setHistory(prev => [newResult, ...prev]);
-    toast({
-      title: "Vencedor!",
-      description: `O segmento selecionado foi: ${segment.label}`,
-    });
-  }, [toast]);
+  }, []);
 
   return (
-    <div className="min-h-screen py-6 md:py-12 px-4 md:px-8 max-w-7xl mx-auto flex flex-col items-center gap-8 md:gap-12">
-      <header className="text-center space-y-2">
-        <h1 className="font-headline text-4xl md:text-7xl gold-text font-black tracking-tighter italic">
-          ROLETA PREMIUM
+    <div className="min-h-screen py-10 px-4 flex flex-col items-center gap-10 max-w-4xl mx-auto">
+      <header className="text-center space-y-4 max-w-2xl">
+        <div className="inline-flex items-center gap-3 px-4 py-1 rounded-full border border-gold/30 bg-gold/5 text-gold text-[10px] uppercase tracking-[0.4em] font-bold">
+          <span className="w-1 h-1 rounded-full bg-gold shadow-[0_0_5px_#D4A24C]" />
+          Sorteios Místicos
+          <span className="w-1 h-1 rounded-full bg-gold shadow-[0_0_5px_#D4A24C]" />
+        </div>
+        
+        <h1 className="font-cinzel text-5xl md:text-7xl text-gold font-black tracking-tighter text-glow-gold">
+          Aurora Cartomante
         </h1>
-        <p className="text-gold/60 font-medium tracking-widest text-xs md:text-sm uppercase">
-          Experimente o luxo da sorte
+        
+        <div className="text-gold/60 font-cinzel text-sm tracking-[0.2em] uppercase">
+          — Roleta de Sorteios —
+        </div>
+
+        <p className="text-gold/40 text-sm md:text-base leading-relaxed max-w-lg mx-auto italic">
+          "Deixe o destino guiar sua sorte. Gire a roleta e descubra o que as cartas reservaram para você — o grande prêmio é de R$ 1.000,00."
         </p>
       </header>
 
-      <main className="w-full flex flex-col lg:grid lg:grid-cols-12 gap-8 md:gap-12 items-start">
-        {/* Management Panel - Bottom on mobile, Left on PC */}
-        <div className="w-full lg:col-span-3 order-3 lg:order-1">
-          <SegmentManager segments={segments} setSegments={setSegments} />
-        </div>
+      <div className="flex flex-col items-center gap-12 w-full">
+        <Wheel 
+          segments={AURORA_SEGMENTS} 
+          onResult={onResult} 
+          isSpinning={isSpinning} 
+          setIsSpinning={setIsSpinning}
+          targetAngleRef={targetAngleRef}
+        />
 
-        {/* Wheel Display - Top on mobile, Center on PC */}
-        <div className="w-full lg:col-span-6 flex flex-col items-center gap-8 md:gap-10 order-1 lg:order-2">
-          <div className="relative w-full flex justify-center">
-             <Wheel 
-              segments={segments} 
-              onResult={onResult} 
-              isSpinning={isSpinning} 
-              setIsSpinning={setIsSpinning}
-              targetAngleRef={targetAngleRef}
-            />
-            
-            {winner && !isSpinning && (
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-[40] animate-in fade-in zoom-in duration-500 p-4">
-                <div className="bg-obsidian/95 backdrop-blur-md border-2 border-gold rounded-2xl p-6 text-center shadow-[0_0_50px_rgba(212,175,55,0.4)] min-w-[200px]">
-                  <Trophy className="w-10 h-10 text-gold mx-auto mb-2 animate-bounce" />
-                  <p className="text-gold/70 text-sm uppercase tracking-widest mb-1">Resultado</p>
-                  <h2 className="text-cream text-2xl md:text-3xl font-headline font-bold">{winner.label}</h2>
-                  {winner.subLabel && <p className="text-gold/50 text-xs mt-1">{winner.subLabel}</p>}
-                </div>
-              </div>
-            )}
+        <Button 
+          onClick={handleSpin}
+          disabled={isSpinning}
+          className="w-full max-w-[320px] h-14 md:h-16 text-lg font-cinzel font-black gold-gradient-border text-obsidian rounded-full aurora-btn-shadow hover:scale-105 active:scale-95 transition-all uppercase tracking-widest border-2 border-gold/50"
+        >
+          {isSpinning ? "Consultando o destino..." : "Girar Roleta"}
+        </Button>
+
+        {/* Card Grande Prêmio */}
+        <div className="w-full max-w-md p-[1.5px] rounded-2xl gold-gradient-border shadow-2xl">
+          <div className="bg-gradient-to-br from-[#1A0203]/95 to-[#3B0F1A]/95 backdrop-blur-md rounded-[15px] p-6 flex items-center justify-between">
+            <div className="space-y-1">
+              <div className="text-gold/50 text-[10px] uppercase tracking-[0.3em] font-bold">Grande Prêmio</div>
+              <div className="font-cinzel text-3xl md:text-4xl text-gold font-black">R$ 1.000,00</div>
+            </div>
+            <div className="w-14 h-14 rounded-full bg-gold flex items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.4)]">
+              <Star className="w-8 h-8 text-[#1A0203] fill-[#1A0203]" />
+            </div>
           </div>
-
-          <Button 
-            onClick={handleSpin}
-            disabled={isSpinning}
-            className="w-full max-w-[280px] h-16 md:h-20 text-xl md:text-2xl font-headline font-black gold-gradient text-obsidian rounded-full shadow-2xl hover:scale-105 active:scale-95 transition-transform border-4 border-gold-dark metallic-shadow"
-          >
-            {isSpinning ? (
-              <Dices className="w-8 h-8 animate-spin" />
-            ) : (
-              "GIRAR AGORA"
-            )}
-          </Button>
         </div>
+      </div>
 
-        {/* History Panel - Middle on mobile, Right on PC */}
-        <div className="w-full lg:col-span-3 h-[400px] lg:h-[600px] order-2 lg:order-3">
-          <History history={history} />
-        </div>
-      </main>
-
-      <footer className="mt-auto pt-12 pb-6 text-gold/30 text-[10px] md:text-xs text-center border-t border-gold/10 w-full max-w-4xl">
-        &copy; 2024 ROLETA PREMIUM STUDIO • DESIGN LUXUOSO & ALGORITMOS PRECISOS
+      <footer className="mt-10 py-6 text-gold/20 text-[10px] uppercase tracking-[0.3em] text-center border-t border-gold/10 w-full">
+        Aurora Cartomante · Todos os direitos reservados
       </footer>
+
+      {/* Result Modal */}
+      {winner && !isSpinning && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 modal-backdrop animate-in fade-in duration-500">
+          <div className="w-full max-w-sm p-[2px] rounded-3xl gold-gradient-border shadow-[0_0_100px_rgba(212,175,55,0.3)]">
+            <div className="bg-[#1A0203] rounded-[22px] p-10 text-center space-y-6">
+              <div className="w-20 h-20 rounded-full bg-gold/10 border border-gold/30 mx-auto flex items-center justify-center">
+                <Trophy className="w-10 h-10 text-gold animate-bounce" />
+              </div>
+              <div className="space-y-2">
+                <p className="text-gold/50 text-xs uppercase tracking-[0.3em]">O destino falou</p>
+                <h2 className="font-cinzel text-3xl md:text-4xl text-gold font-black leading-tight">
+                  {winner.label.split('(')[0]}
+                </h2>
+                {winner.label.includes('(') && (
+                  <p className="text-gold text-sm font-bold tracking-widest">GRANDE PRÊMIO</p>
+                )}
+              </div>
+              <Button 
+                onClick={() => setWinner(null)}
+                className="w-full h-12 rounded-full gold-gradient-border text-obsidian font-cinzel font-bold uppercase tracking-widest hover:scale-105 transition-transform"
+              >
+                <RefreshCcw className="w-4 h-4 mr-2" /> Jogar Novamente
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,29 +1,30 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 20 15% 4%;
-    --foreground: 60 30% 96%;
-    --card: 20 15% 6%;
-    --card-foreground: 60 30% 96%;
-    --popover: 20 15% 5%;
-    --popover-foreground: 60 30% 96%;
-    --primary: 45 65% 52%;
-    --primary-foreground: 20 15% 4%;
-    --secondary: 0 92% 15%;
-    --secondary-foreground: 60 30% 96%;
-    --muted: 20 15% 15%;
-    --muted-foreground: 45 20% 65%;
-    --accent: 45 65% 52%;
-    --accent-foreground: 20 15% 4%;
+    --background: 350 20% 2%;
+    --foreground: 45 40% 90%;
+    --card: 350 20% 4%;
+    --card-foreground: 45 40% 90%;
+    --popover: 350 20% 3%;
+    --popover-foreground: 45 40% 90%;
+    --primary: 45 80% 65%;
+    --primary-foreground: 350 20% 2%;
+    --secondary: 350 60% 15%;
+    --secondary-foreground: 45 40% 90%;
+    --muted: 350 20% 10%;
+    --muted-foreground: 45 20% 60%;
+    --accent: 45 80% 65%;
+    --accent-foreground: 350 20% 2%;
     --destructive: 0 84% 60%;
-    --destructive-foreground: 60 30% 98%;
-    --border: 45 15% 20%;
-    --input: 45 15% 20%;
-    --ring: 45 65% 52%;
-    --radius: 0.75rem;
+    --destructive-foreground: 45 40% 98%;
+    --border: 45 30% 20%;
+    --input: 45 30% 20%;
+    --ring: 45 80% 65%;
+    --radius: 1rem;
   }
 }
 
@@ -33,24 +34,29 @@
   }
   body {
     @apply bg-background text-foreground font-body antialiased;
-    background-image: radial-gradient(circle at center, #2a1a1a 0%, #0a0505 100%);
+    background-image: linear-gradient(180deg, rgba(10,2,3,0.6) 0%, rgba(26,2,3,0.4) 35%, rgba(26,2,3,0.45) 65%, rgba(10,2,3,0.75) 100%), 
+                      radial-gradient(circle at center, #2a0203 0%, #0a0203 100%);
+    background-attachment: fixed;
   }
 }
 
-.gold-gradient {
-  background: linear-gradient(135deg, #f5d76e 0%, #d4af37 50%, #b8860b 100%);
+.font-cinzel {
+  font-family: 'Cinzel', serif;
 }
 
-.gold-text {
-  @apply bg-clip-text text-transparent;
-  background-image: linear-gradient(to bottom, #f5d76e, #d4af37, #b8860b);
+.gold-gradient-border {
+  background: linear-gradient(135deg, #F5D37A 0%, #D4A24C 50%, #8B5E1F 100%);
 }
 
-.metallic-shadow {
-  box-shadow: 0 0 20px rgba(212, 175, 55, 0.3), inset 0 0 10px rgba(212, 175, 55, 0.2);
+.aurora-btn-shadow {
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.3), inset 0 -2px 4px rgba(0, 0, 0, 0.4);
 }
 
-.wheel-rim {
-  border: 12px solid #d4af37;
-  box-shadow: 0 0 0 4px #b8860b, 0 10px 40px rgba(0,0,0,0.8);
+.text-glow-gold {
+  text-shadow: 0 0 10px rgba(245, 211, 122, 0.5);
+}
+
+.modal-backdrop {
+  background: rgba(10, 2, 3, 0.85);
+  backdrop-filter: blur(8px);
 }
