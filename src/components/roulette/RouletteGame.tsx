@@ -61,10 +61,6 @@ export const RouletteGame = () => {
         <h1 className="font-cinzel text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-gold font-black tracking-tighter text-glow-gold leading-tight">
           GIRE A ROLETA E TENTE A SORTE!
         </h1>
-        
-        <p className="text-gold/40 text-sm md:text-base leading-relaxed max-w-lg mx-auto italic px-4">
-          "Deixe o destino guiar sua sorte. Gire a roleta e descubra o que as cartas reservaram para você — o grande prêmio é de R$ 1.000,00."
-        </p>
       </header>
 
       <div className="flex flex-col items-center gap-12 w-full">
