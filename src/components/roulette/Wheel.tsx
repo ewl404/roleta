@@ -21,6 +21,11 @@ export const Wheel: React.FC<WheelProps> = ({
   targetAngleRef 
 }) => {
   const [rotation, setRotation] = useState(0);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (isSpinning) {
@@ -42,30 +47,25 @@ export const Wheel: React.FC<WheelProps> = ({
   }, [isSpinning, segments, onResult, setIsSpinning, targetAngleRef]);
 
   const renderSegments = () => {
-    const segmentAngle = 360 / segments.length;
+    const total = segments.length;
+    const segmentAngle = 360 / total;
+    const cx = 250, cy = 250, r = 240, textR = 145;
     
-    return segments.map((segment, index) => {
-      const startAngle = index * segmentAngle;
-      const endAngle = (index + 1) * segmentAngle;
-      
-      const radius = 240;
-      const cx = 250;
-      const cy = 250;
-      
-      const x1 = cx + radius * Math.cos((Math.PI * (startAngle - 90)) / 180);
-      const y1 = cy + radius * Math.sin((Math.PI * (startAngle - 90)) / 180);
-      const x2 = cx + radius * Math.cos((Math.PI * (endAngle - 90)) / 180);
-      const y2 = cy + radius * Math.sin((Math.PI * (endAngle - 90)) / 180);
-      
-      const path = `M ${cx} ${cy} L ${x1} ${y1} A ${radius} ${radius} 0 0 1 ${x2} ${y2} Z`;
-      
-      const midAngle = startAngle + segmentAngle / 2;
-      const textRadius = 150; // Posicionado radialmente
-      const tx = cx + textRadius * Math.cos((Math.PI * (midAngle - 90)) / 180);
-      const ty = cy + textRadius * Math.sin((Math.PI * (midAngle - 90)) / 180);
+    return segments.map((segment, i) => {
+      const startAngleRad = (i / total) * 2 * Math.PI - Math.PI / 2;
+      const endAngleRad = ((i + 1) / total) * 2 * Math.PI - Math.PI / 2;
+      const midAngleRad = (startAngleRad + endAngleRad) / 2;
+      const midDeg = (midAngleRad * 180) / Math.PI + 90;
 
-      // Rotação radial (apontando para fora)
-      const textRotation = midAngle;
+      const x1 = cx + r * Math.cos(startAngleRad);
+      const y1 = cy + r * Math.sin(startAngleRad);
+      const x2 = cx + r * Math.cos(endAngleRad);
+      const y2 = cy + r * Math.sin(endAngleRad);
+      
+      const path = `M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y2} Z`;
+      
+      const tx = cx + textR * Math.cos(midAngleRad);
+      const ty = cy + textR * Math.sin(midAngleRad);
 
       const isGrandPrize = segment.label.includes('1.000');
       const isNegative = segment.label.includes('Não foi');
@@ -76,7 +76,7 @@ export const Wheel: React.FC<WheelProps> = ({
           <path d={path} fill={segment.color} stroke="#D4A24C" strokeWidth="1.5" />
           <path d={path} fill="url(#centerGradient)" opacity="0.15" />
           
-          <g transform={`translate(${tx}, ${ty}) rotate(${textRotation})`}>
+          <g transform={`translate(${tx}, ${ty}) rotate(${midDeg})`}>
             {isGrandPrize ? (
               <>
                 <text 
@@ -143,7 +143,7 @@ export const Wheel: React.FC<WheelProps> = ({
               <text 
                 textAnchor="middle" 
                 x="0" y="8" 
-                fill={segment.id === '10' || segment.id === '12' ? "#D4A24C" : "#F5E6C8"}
+                fill={segment.textColor || "#F5E6C8"}
                 className="font-cinzel text-[24px] font-black tracking-wider"
                 style={{ filter: 'url(#textShadow)' }}
               >
@@ -176,7 +176,7 @@ export const Wheel: React.FC<WheelProps> = ({
            }} />
 
       <div className="absolute inset-[16px] rounded-full pointer-events-none z-[3]">
-        {Array.from({ length: 24 }).map((_, i) => {
+        {mounted && Array.from({ length: 24 }).map((_, i) => {
           const angle = (i * 360) / 24;
           const isGold = i % 2 === 0;
           return (
