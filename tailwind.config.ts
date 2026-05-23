@@ -11,7 +11,7 @@ export default {
     extend: {
       fontFamily: {
         body: ['Inter', 'sans-serif'],
-        headline: ['Inter', 'sans-serif'],
+        headline: ['Playfair Display', 'serif'],
         code: ['monospace'],
       },
       colors: {
@@ -65,6 +65,14 @@ export default {
           border: 'hsl(var(--sidebar-border))',
           ring: 'hsl(var(--sidebar-ring))',
         },
+        gold: {
+          DEFAULT: '#D4AF37',
+          light: '#F5D76E',
+          dark: '#B8860B',
+        },
+        burgundy: '#4A0404',
+        obsidian: '#1A0F0D',
+        cream: '#F5F5DC',
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -88,10 +96,15 @@ export default {
             height: '0',
           },
         },
+        'spin-slow': {
+          from: { transform: 'rotate(0deg)' },
+          to: { transform: 'rotate(360deg)' },
+        }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'spin-slow': 'spin-slow 20s linear infinite',
       },
     },
   },
