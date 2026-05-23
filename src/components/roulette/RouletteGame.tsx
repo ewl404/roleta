@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useRef, useCallback } from 'react';
@@ -50,8 +49,8 @@ export const RouletteGame = () => {
   }, []);
 
   return (
-    <div className="min-h-screen py-10 px-4 flex flex-col items-center gap-10 max-w-4xl mx-auto">
-      <header className="text-center space-y-4 max-w-3xl w-full">
+    <div className="min-h-screen py-6 md:py-10 px-4 flex flex-col items-center gap-2 md:gap-4 max-w-4xl mx-auto">
+      <header className="text-center space-y-2 md:space-y-3 max-w-3xl w-full z-10">
         <div className="inline-flex items-center gap-3 px-4 py-1 rounded-full border border-gold/30 bg-gold/5 text-gold text-[10px] uppercase tracking-[0.4em] font-bold">
           <span className="w-1 h-1 rounded-full bg-gold shadow-[0_0_5px_#D4A24C]" />
           Sorteios Místicos
@@ -63,7 +62,7 @@ export const RouletteGame = () => {
         </h1>
       </header>
 
-      <div className="flex flex-col items-center gap-12 w-full">
+      <div className="flex flex-col items-center gap-6 md:gap-10 w-full -mt-4 md:-mt-8">
         <Wheel 
           segments={AURORA_SEGMENTS} 
           onResult={onResult} 
@@ -93,7 +92,7 @@ export const RouletteGame = () => {
         </div>
       </div>
 
-      <footer className="mt-10 py-6 text-gold/20 text-[10px] uppercase tracking-[0.3em] text-center border-t border-gold/10 w-full">
+      <footer className="mt-6 py-4 text-gold/20 text-[10px] uppercase tracking-[0.3em] text-center border-t border-gold/10 w-full">
         Aurora Cartomante · Todos os direitos reservados
       </footer>
 
