@@ -25,6 +25,7 @@ const AURORA_SEGMENTS: WheelSegment[] = [
 export const RouletteGame = () => {
   const [isSpinning, setIsSpinning] = useState(false);
   const [winner, setWinner] = useState<WheelSegment | null>(null);
+  const [spinCount, setSpinCount] = useState(0);
   const targetAngleRef = useRef(0);
   const currentRotationRef = useRef(0);
 
@@ -34,16 +35,29 @@ export const RouletteGame = () => {
     setWinner(null);
     setIsSpinning(true);
 
+    let targetSegmentIndex;
+    if (spinCount === 0) {
+      // Primeiro giro: "Tentar Novamente" (índice 3 ou 7)
+      targetSegmentIndex = 3;
+    } else if (spinCount === 1) {
+      // Segundo giro: "R$ 1.000" (índice 0)
+      targetSegmentIndex = 0;
+    } else {
+      // Giros subsequentes: aleatório
+      targetSegmentIndex = Math.floor(Math.random() * AURORA_SEGMENTS.length);
+    }
+
+    setSpinCount(prev => prev + 1);
+
     const extraRotations = 10;
-    const randomSegmentIndex = Math.floor(Math.random() * AURORA_SEGMENTS.length);
     const segmentAngle = 360 / AURORA_SEGMENTS.length;
-    const targetSegmentAngle = (randomSegmentIndex * segmentAngle) + (segmentAngle / 2);
+    const targetSegmentAngle = (targetSegmentIndex * segmentAngle) + (segmentAngle / 2);
     
     const newTarget = currentRotationRef.current + (extraRotations * 360) + (360 - (currentRotationRef.current % 360)) + (360 - targetSegmentAngle);
     
     targetAngleRef.current = newTarget;
     currentRotationRef.current = newTarget;
-  }, [isSpinning]);
+  }, [isSpinning, spinCount]);
 
   const onResult = useCallback((segment: WheelSegment) => {
     setWinner(segment);
@@ -77,7 +91,7 @@ export const RouletteGame = () => {
           disabled={isSpinning}
           className="w-full max-w-[320px] h-14 md:h-16 text-lg font-cinzel font-black gold-gradient-border text-obsidian rounded-full aurora-btn-shadow hover:scale-105 active:scale-95 transition-all uppercase tracking-widest border-2 border-gold/50"
         >
-          {isSpinning ? "Consultando o destino..." : "Girar Roleta"}
+          Girar Roleta
         </Button>
 
         <div className="w-full max-w-md p-[1.5px] rounded-2xl gold-gradient-border shadow-2xl">
@@ -105,7 +119,7 @@ export const RouletteGame = () => {
                 <Trophy className="w-10 h-10 text-gold animate-bounce" />
               </div>
               <div className="space-y-2">
-                <p className="text-gold/50 text-xs uppercase tracking-[0.3em]">O destino falou</p>
+                <p className="text-gold/50 text-xs uppercase tracking-[0.3em]">O resultado foi</p>
                 <h2 className="font-cinzel text-3xl md:text-4xl text-gold font-black leading-tight">
                   {winner.label.split('(')[0]}
                 </h2>
