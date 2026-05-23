@@ -100,7 +100,7 @@ export default function ResgatarPage() {
       {flowStep === 'form' && (
         <div className="relative z-10 w-full max-w-[320px] flex flex-col items-center animate-in fade-in duration-700">
           <header className="text-center mb-6 max-w-[290px]">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#D4A24C]/45 bg-[#FEFAF4]/60 text-[#7A5010] backdrop-blur-md mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#D4A24C]/45 bg-[#FEFAF4]/20 text-[#7A5010] backdrop-blur-md mb-4">
               <span className="w-1 h-1 rounded-full bg-[#C49A28] animate-pulse" />
               <span className="font-cinzel text-[9px] tracking-[0.3em] uppercase font-bold">Mapa da Sorte</span>
               <span className="w-1 h-1 rounded-full bg-[#C49A28] animate-pulse [animation-delay:1s]" />
@@ -127,7 +127,7 @@ export default function ResgatarPage() {
                   type="text" 
                   placeholder="Seu nome completo"
                   value={nome}
-                  onChange={(e) => { setNome(e.target.value); checkFields(); }}
+                  onChange={(e) => setNome(e.target.value)}
                   className="w-full h-11 rounded-xl px-4 text-[13px] bg-white border-1.5 border-[#E8D5A8] text-[#2A1205] font-medium focus:border-[#D4A24C] focus:ring-4 focus:ring-[#D4A24C]/10 outline-none transition-all placeholder:text-[#2A1205]/40"
                 />
               </div>
@@ -138,7 +138,7 @@ export default function ResgatarPage() {
                   type="tel" 
                   placeholder="(00) 00000-0000"
                   value={telefone}
-                  onChange={(e) => { handleTelefoneChange(e); checkFields(); }}
+                  onChange={handleTelefoneChange}
                   className="w-full h-11 rounded-xl px-4 text-[13px] bg-white border-1.5 border-[#E8D5A8] text-[#2A1205] font-medium focus:border-[#D4A24C] focus:ring-4 focus:ring-[#D4A24C]/10 outline-none transition-all placeholder:text-[#2A1205]/40"
                 />
               </div>
@@ -149,7 +149,7 @@ export default function ResgatarPage() {
                   type="text" 
                   placeholder="CPF, e-mail ou aleatória"
                   value={pix}
-                  onChange={(e) => { setPix(e.target.value); checkFields(); }}
+                  onChange={(e) => setPix(e.target.value)}
                   className="w-full h-11 rounded-xl px-4 text-[13px] bg-white border-1.5 border-[#E8D5A8] text-[#2A1205] font-medium focus:border-[#D4A24C] focus:ring-4 focus:ring-[#D4A24C]/10 outline-none transition-all placeholder:text-[#2A1205]/40"
                 />
               </div>
@@ -168,7 +168,6 @@ export default function ResgatarPage() {
 
               <button 
                 type="submit"
-                id="btnSubmit"
                 disabled={!isFormValid}
                 className={cn(
                   "w-full h-13 rounded-xl mt-2 font-cinzel text-[13px] font-bold tracking-[0.2em] uppercase transition-all shadow-lg active:scale-95",
@@ -182,7 +181,7 @@ export default function ResgatarPage() {
             </form>
           </div>
 
-          <div className="mt-6 inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-[#D4A24C]/20 bg-[#1A0205]/40 text-[#D4A24C] backdrop-blur-md text-[10px] font-medium">
+          <div className="mt-6 inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-[#D4A24C]/20 bg-[#1A0205]/20 text-[#D4A24C] backdrop-blur-md text-[10px] font-medium">
             <Lock className="w-3.5 h-3.5" />
             Transferência segura via PIX · Banco Central do Brasil
           </div>
@@ -311,7 +310,7 @@ export default function ResgatarPage() {
             <div className="h-2 w-full bg-gradient-to-r from-[#F5D37A] via-[#D4A24C] to-[#8B5E1F]" />
             <div className="p-8">
               <div className="text-center mb-8">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#D4A24C]/30 bg-[#FFF8EC] text-[#8B5E1F] mb-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#D4A24C]/30 bg-[#FFF8EC]/20 text-[#8B5E1F] mb-4">
                   <Lock className="w-3 h-3" />
                   <span className="font-cinzel text-[9px] tracking-[0.2em] uppercase font-bold">Protocolo de Liberação</span>
                 </div>
