@@ -39,8 +39,6 @@ export const RouletteGame = () => {
     const segmentAngle = 360 / AURORA_SEGMENTS.length;
     const targetSegmentAngle = (randomSegmentIndex * segmentAngle) + (segmentAngle / 2);
     
-    // Calculate new rotation to land exactly on the segment
-    // normalized target = (360 - targetSegmentAngle)
     const newTarget = currentRotationRef.current + (extraRotations * 360) + (360 - (currentRotationRef.current % 360)) + (360 - targetSegmentAngle);
     
     targetAngleRef.current = newTarget;
@@ -61,7 +59,7 @@ export const RouletteGame = () => {
         </div>
         
         <h1 className="font-cinzel text-5xl md:text-7xl text-gold font-black tracking-tighter text-glow-gold">
-          Aurora Cartomante
+          GIRE A ROLETA E TENTE A SORTE!
         </h1>
         
         <div className="text-gold/60 font-cinzel text-sm tracking-[0.2em] uppercase">
@@ -90,7 +88,6 @@ export const RouletteGame = () => {
           {isSpinning ? "Consultando o destino..." : "Girar Roleta"}
         </Button>
 
-        {/* Card Grande Prêmio */}
         <div className="w-full max-w-md p-[1.5px] rounded-2xl gold-gradient-border shadow-2xl">
           <div className="bg-gradient-to-br from-[#1A0203]/95 to-[#3B0F1A]/95 backdrop-blur-md rounded-[15px] p-6 flex items-center justify-between">
             <div className="space-y-1">
@@ -108,7 +105,6 @@ export const RouletteGame = () => {
         Aurora Cartomante · Todos os direitos reservados
       </footer>
 
-      {/* Result Modal */}
       {winner && !isSpinning && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 modal-backdrop animate-in fade-in duration-500">
           <div className="w-full max-w-sm p-[2px] rounded-3xl gold-gradient-border shadow-[0_0_100px_rgba(212,175,55,0.3)]">
