@@ -48,14 +48,13 @@ export const Wheel: React.FC<WheelProps> = ({
 
   const renderSegments = () => {
     const total = segments.length;
-    const segmentAngle = 360 / total;
     const cx = 250, cy = 250, r = 240, textR = 145;
     
     return segments.map((segment, i) => {
       const startAngleRad = (i / total) * 2 * Math.PI - Math.PI / 2;
       const endAngleRad = ((i + 1) / total) * 2 * Math.PI - Math.PI / 2;
       const midAngleRad = (startAngleRad + endAngleRad) / 2;
-      const midDeg = (midAngleRad * 180) / Math.PI + 90;
+      const midDeg = (midAngleRad * 180) / Math.PI + 90; // +90 para orientação radial correta
 
       const x1 = cx + r * Math.cos(startAngleRad);
       const y1 = cy + r * Math.sin(startAngleRad);
@@ -101,7 +100,7 @@ export const Wheel: React.FC<WheelProps> = ({
               <>
                 <text 
                   textAnchor="middle" 
-                  x="0" y="-6" 
+                  x="0" y="-8" 
                   fill="#A88247"
                   className="font-cinzel text-[15px] font-bold"
                   style={{ filter: 'url(#textShadow)' }}
@@ -110,7 +109,7 @@ export const Wheel: React.FC<WheelProps> = ({
                 </text>
                 <text 
                   textAnchor="middle" 
-                  x="0" y="12" 
+                  x="0" y="10" 
                   fill="#A88247"
                   className="font-cinzel text-[13px] font-semibold"
                   style={{ filter: 'url(#textShadow)' }}
@@ -122,7 +121,7 @@ export const Wheel: React.FC<WheelProps> = ({
               <>
                 <text 
                   textAnchor="middle" 
-                  x="0" y="-6" 
+                  x="0" y="-8" 
                   fill="#F5E6C8"
                   className="font-cinzel text-[15px] font-bold"
                   style={{ filter: 'url(#textShadow)' }}
@@ -131,7 +130,7 @@ export const Wheel: React.FC<WheelProps> = ({
                 </text>
                 <text 
                   textAnchor="middle" 
-                  x="0" y="12" 
+                  x="0" y="10" 
                   fill="#F5E6C8"
                   className="font-cinzel text-[13px] font-semibold"
                   style={{ filter: 'url(#textShadow)' }}
@@ -142,7 +141,8 @@ export const Wheel: React.FC<WheelProps> = ({
             ) : (
               <text 
                 textAnchor="middle" 
-                x="0" y="8" 
+                dominantBaseline="middle"
+                x="0" y="0" 
                 fill={segment.textColor || "#F5E6C8"}
                 className="font-cinzel text-[24px] font-black tracking-wider"
                 style={{ filter: 'url(#textShadow)' }}
