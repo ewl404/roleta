@@ -65,7 +65,7 @@ export const CardGame = () => {
         
         <div className="space-y-3">
           <p className="text-[#F5E6C8] text-[13px] max-w-[300px] mx-auto leading-relaxed">
-            O destino aguarda. Escolha <span className="font-bold text-[#F5D37A]">uma carta</span> e descubra quantas rodadas na roleta você ganhou.
+            Escolha <span className="font-bold text-[#F5D37A]">uma carta</span> e descubra quantas rodadas na roleta você ganhou.
           </p>
         </div>
       </header>
