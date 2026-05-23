@@ -56,7 +56,7 @@ export const CardGame = () => {
     <div className="min-h-screen py-8 md:py-12 px-4 flex flex-col items-center max-w-5xl mx-auto">
       <header className="text-center space-y-4 mb-8 md:mb-12">
         <div className="inline-flex items-center gap-3 px-4 py-1 rounded-full border border-[#D4A24C]/30 bg-[#D4A24C]/5 text-[#D4A24C] text-[10px] uppercase tracking-[0.4em] font-bold backdrop-blur-sm">
-          ✦ Sorteios Místicos ✦
+          ✦ Mapa da Sorte ✦
         </div>
         
         <h1 className="font-cinzel text-3xl md:text-5xl text-[#F5D37A] font-black tracking-tighter text-glow-gold leading-tight drop-shadow-[0_0_10px_rgba(245,211,122,0.5)]">

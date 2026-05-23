@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useRef, useCallback } from 'react';
@@ -68,7 +67,7 @@ export const RouletteGame = () => {
       <header className="text-center space-y-2 md:space-y-3 max-w-3xl w-full z-10">
         <div className="inline-flex items-center gap-3 px-4 py-1 rounded-full border border-gold/30 bg-gold/5 text-gold text-[10px] uppercase tracking-[0.4em] font-bold">
           <span className="w-1 h-1 rounded-full bg-gold shadow-[0_0_5px_#D4A24C]" />
-          Sorteios Místicos
+          Mapa da Sorte
           <span className="w-1 h-1 rounded-full bg-gold shadow-[0_0_5px_#D4A24C]" />
         </div>
         
