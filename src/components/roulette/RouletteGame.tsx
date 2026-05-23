@@ -107,7 +107,7 @@ export const RouletteGame = () => {
       </div>
 
       <footer className="mt-6 py-4 text-gold/20 text-[10px] uppercase tracking-[0.3em] text-center border-t border-gold/10 w-full">
-        Aurora Cartomante · Todos os direitos reservados
+        Todos os direitos reservados
       </footer>
 
       {winner && !isSpinning && (
