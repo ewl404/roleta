@@ -3,7 +3,7 @@
 
 import React, { useState, useRef, useCallback } from 'react';
 import { Wheel } from './Wheel';
-import { WheelSegment, SpinResult } from '@/lib/types';
+import { WheelSegment } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Star, Trophy, RefreshCcw } from 'lucide-react';
 
@@ -62,10 +62,6 @@ export const RouletteGame = () => {
           GIRE A ROLETA E TENTE A SORTE!
         </h1>
         
-        <div className="text-gold/60 font-cinzel text-xs sm:text-sm tracking-[0.2em] uppercase">
-          — Roleta de Sorteios —
-        </div>
-
         <p className="text-gold/40 text-sm md:text-base leading-relaxed max-w-lg mx-auto italic px-4">
           "Deixe o destino guiar sua sorte. Gire a roleta e descubra o que as cartas reservaram para você — o grande prêmio é de R$ 1.000,00."
         </p>
