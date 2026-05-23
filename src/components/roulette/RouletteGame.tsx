@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useRef, useCallback } from 'react';
@@ -5,6 +6,7 @@ import { Wheel } from './Wheel';
 import { WheelSegment } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Star, Trophy, RefreshCcw, Wallet } from 'lucide-react';
+import Link from 'next/link';
 
 const AURORA_SEGMENTS: WheelSegment[] = [
   { id: '1', label: 'R$ 1.000 (GRANDE PRÊMIO)', weight: 1, color: '#D4A24C' },
@@ -126,20 +128,21 @@ export const RouletteGame = () => {
                   <p className="text-gold text-sm font-bold tracking-widest">GRANDE PRÊMIO</p>
                 )}
               </div>
-              <Button 
-                onClick={() => setWinner(null)}
-                className="w-full h-12 rounded-full gold-gradient-border text-obsidian font-cinzel font-bold uppercase tracking-widest hover:scale-105 transition-transform"
-              >
-                {winner.label.includes('1.000') ? (
-                  <>
+              
+              {winner.label.includes('1.000') ? (
+                <Link href="/resgatar" className="w-full">
+                  <Button className="w-full h-12 rounded-full gold-gradient-border text-obsidian font-cinzel font-bold uppercase tracking-widest hover:scale-105 transition-transform">
                     <Wallet className="w-4 h-4 mr-2" /> Resgatar prêmio
-                  </>
-                ) : (
-                  <>
-                    <RefreshCcw className="w-4 h-4 mr-2" /> Jogar Novamente
-                  </>
-                )}
-              </Button>
+                  </Button>
+                </Link>
+              ) : (
+                <Button 
+                  onClick={() => setWinner(null)}
+                  className="w-full h-12 rounded-full gold-gradient-border text-obsidian font-cinzel font-bold uppercase tracking-widest hover:scale-105 transition-transform"
+                >
+                  <RefreshCcw className="w-4 h-4 mr-2" /> Jogar Novamente
+                </Button>
+              )}
             </div>
           </div>
         </div>
