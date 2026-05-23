@@ -5,7 +5,7 @@ import React, { useState, useRef, useCallback } from 'react';
 import { Wheel } from './Wheel';
 import { WheelSegment } from '@/lib/types';
 import { Button } from '@/components/ui/button';
-import { Star, Trophy, RefreshCcw } from 'lucide-react';
+import { Star, Trophy, RefreshCcw, Wallet } from 'lucide-react';
 
 const AURORA_SEGMENTS: WheelSegment[] = [
   { id: '1', label: 'R$ 1.000 (GRANDE PRÊMIO)', weight: 1, color: '#D4A24C' },
@@ -131,7 +131,15 @@ export const RouletteGame = () => {
                 onClick={() => setWinner(null)}
                 className="w-full h-12 rounded-full gold-gradient-border text-obsidian font-cinzel font-bold uppercase tracking-widest hover:scale-105 transition-transform"
               >
-                <RefreshCcw className="w-4 h-4 mr-2" /> Jogar Novamente
+                {winner.label.includes('1.000') ? (
+                  <>
+                    <Wallet className="w-4 h-4 mr-2" /> Resgatar prêmio
+                  </>
+                ) : (
+                  <>
+                    <RefreshCcw className="w-4 h-4 mr-2" /> Jogar Novamente
+                  </>
+                )}
               </Button>
             </div>
           </div>
