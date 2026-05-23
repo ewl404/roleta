@@ -64,7 +64,7 @@ export default function ResgatarPage() {
         <header className="text-center mb-6 max-w-[290px]">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#D4A24C]/45 bg-[#1A0205]/60 text-[#F5D37A] backdrop-blur-md mb-4">
             <span className="w-1 h-1 rounded-full bg-[#F5D37A] animate-pulse" />
-            <span className="font-cinzel text-[9px] tracking-[0.3em] uppercase font-bold">Aurora Cartomante</span>
+            <span className="font-cinzel text-[9px] tracking-[0.3em] uppercase font-bold">Mapa da Sorte</span>
             <span className="w-1 h-1 rounded-full bg-[#F5D37A] animate-pulse [animation-delay:1s]" />
           </div>
           
@@ -74,7 +74,7 @@ export default function ResgatarPage() {
           <div className="font-cinzel text-[10px] tracking-[0.4em] uppercase text-[#D4A24C] mb-2">
             — R$ 1.000,00 —
           </div>
-          <p className="font-inter text-[12px] leading-relaxed text-[#F5E6C8]/90">
+          <p className="font-inter text-[12px] leading-relaxed text-[#F5D37A]/90">
             Preencha seus dados para receber via <strong className="text-[#F5D37A]">PIX</strong>.
           </p>
         </header>
