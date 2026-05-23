@@ -51,22 +51,22 @@ export const RouletteGame = () => {
 
   return (
     <div className="min-h-screen py-10 px-4 flex flex-col items-center gap-10 max-w-4xl mx-auto">
-      <header className="text-center space-y-4 max-w-2xl">
+      <header className="text-center space-y-4 max-w-3xl w-full">
         <div className="inline-flex items-center gap-3 px-4 py-1 rounded-full border border-gold/30 bg-gold/5 text-gold text-[10px] uppercase tracking-[0.4em] font-bold">
           <span className="w-1 h-1 rounded-full bg-gold shadow-[0_0_5px_#D4A24C]" />
           Sorteios Místicos
           <span className="w-1 h-1 rounded-full bg-gold shadow-[0_0_5px_#D4A24C]" />
         </div>
         
-        <h1 className="font-cinzel text-5xl md:text-7xl text-gold font-black tracking-tighter text-glow-gold">
+        <h1 className="font-cinzel text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-gold font-black tracking-tighter text-glow-gold leading-tight">
           GIRE A ROLETA E TENTE A SORTE!
         </h1>
         
-        <div className="text-gold/60 font-cinzel text-sm tracking-[0.2em] uppercase">
+        <div className="text-gold/60 font-cinzel text-xs sm:text-sm tracking-[0.2em] uppercase">
           — Roleta de Sorteios —
         </div>
 
-        <p className="text-gold/40 text-sm md:text-base leading-relaxed max-w-lg mx-auto italic">
+        <p className="text-gold/40 text-sm md:text-base leading-relaxed max-w-lg mx-auto italic px-4">
           "Deixe o destino guiar sua sorte. Gire a roleta e descubra o que as cartas reservaram para você — o grande prêmio é de R$ 1.000,00."
         </p>
       </header>
