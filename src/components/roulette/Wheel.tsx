@@ -51,10 +51,13 @@ export const Wheel: React.FC<WheelProps> = ({
     const cx = 250, cy = 250, r = 240, textR = 145;
     
     return segments.map((segment, i) => {
+      // Ângulos em Radianos
       const startAngleRad = (i / total) * 2 * Math.PI - Math.PI / 2;
       const endAngleRad = ((i + 1) / total) * 2 * Math.PI - Math.PI / 2;
       const midAngleRad = (startAngleRad + endAngleRad) / 2;
-      const midDeg = (midAngleRad * 180) / Math.PI + 90; // +90 para orientação radial correta
+      
+      // midDeg sem o "+ 90" para garantir orientação RADIAL (apontando para fora)
+      const midDeg = (midAngleRad * 180) / Math.PI;
 
       const x1 = cx + r * Math.cos(startAngleRad);
       const y1 = cy + r * Math.sin(startAngleRad);
@@ -89,7 +92,7 @@ export const Wheel: React.FC<WheelProps> = ({
                 </text>
                 <text 
                   textAnchor="middle" 
-                  x="0" y="16" 
+                  x="0" y="14" 
                   fill="#2A0A0A" 
                   className="font-cinzel text-[9px] font-bold tracking-[0.2em]"
                 >
