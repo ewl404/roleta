@@ -1,5 +1,12 @@
+
 {
   "placeholderImages": [
+    {
+      "id": "mystical-bg",
+      "description": "Dark mystical atmosphere with candles and tarot vibes",
+      "imageUrl": "https://images.unsplash.com/photo-1572061486195-d811e12d0a10?q=80&w=2070&auto=format&fit=crop",
+      "imageHint": "mystical cards"
+    },
     {
       "id": "casino-bg",
       "description": "Luxurious casino atmosphere background",

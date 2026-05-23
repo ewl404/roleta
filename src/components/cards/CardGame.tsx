@@ -4,7 +4,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { TarotCard } from './TarotCard';
 import { Button } from '@/components/ui/button';
-import { RefreshCcw, Sparkles, ArrowRight } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 
 type CardResult = {
@@ -26,7 +26,6 @@ const INITIAL_RESULTS: Omit<CardResult, 'id'>[] = [
 export const CardGame = () => {
   const [cards, setCards] = useState<CardResult[]>([]);
   const [revealedIndex, setRevealedIndex] = useState<number | null>(null);
-  const [isResetting, setIsResetting] = useState(false);
 
   const shuffleCards = useCallback(() => {
     const shuffled = [...INITIAL_RESULTS]
@@ -45,36 +44,28 @@ export const CardGame = () => {
     setRevealedIndex(index);
   };
 
-  const handleReset = () => {
-    setIsResetting(true);
-    setTimeout(() => {
-      shuffleCards();
-      setIsResetting(false);
-    }, 300);
-  };
-
   return (
-    <div className="min-h-screen py-8 md:py-12 px-4 flex flex-col items-center max-w-5xl mx-auto z-10 relative">
+    <div className="min-h-screen py-8 md:py-12 px-4 flex flex-col items-center max-w-5xl mx-auto">
       <header className="text-center space-y-4 mb-8 md:mb-12">
-        <div className="inline-flex items-center gap-3 px-4 py-1 rounded-full border border-gold/30 bg-gold/5 text-gold text-[10px] uppercase tracking-[0.4em] font-bold">
+        <div className="inline-flex items-center gap-3 px-4 py-1 rounded-full border border-[#D4A24C]/30 bg-[#D4A24C]/5 text-[#D4A24C] text-[10px] uppercase tracking-[0.4em] font-bold backdrop-blur-sm">
           ✦ Sorteios Místicos ✦
         </div>
         
-        <h1 className="font-cinzel text-4xl md:text-5xl lg:text-6xl text-gold font-black tracking-tighter text-glow-gold leading-tight">
+        <h1 className="font-cinzel text-3xl md:text-5xl text-[#F5D37A] font-black tracking-tighter text-glow-gold leading-tight drop-shadow-[0_0_10px_rgba(245,211,122,0.5)]">
           Aurora Cartomante
         </h1>
         
-        <div className="space-y-2">
-          <p className="text-gold/60 font-cinzel text-sm md:text-lg tracking-[0.2em] uppercase">
-            — Escolha sua Carta —
+        <div className="space-y-3">
+          <p className="text-[#D4A24C] font-cinzel text-[11px] tracking-[0.45em] uppercase">
+            — ESCOLHA SUA CARTA —
           </p>
-          <p className="text-cream/60 text-xs md:text-sm max-w-md mx-auto leading-relaxed">
-            O destino aguarda. Escolha uma carta e descubra quantas rodadas na roleta você ganhou.
+          <p className="text-[#F5E6C8] text-[13px] max-w-[300px] mx-auto leading-relaxed">
+            O destino aguarda. Escolha <span className="font-bold text-[#F5D37A]">uma carta</span> e descubra quantas rodadas na roleta você ganhou.
           </p>
         </div>
       </header>
 
-      <div className="grid grid-cols-3 gap-3 md:gap-6 w-full max-w-[340px] md:max-w-[600px] mb-8">
+      <div className="grid grid-cols-3 gap-3 md:gap-4 w-full max-w-[320px] md:max-w-[400px] mb-8">
         {cards.map((card, idx) => (
           <TarotCard
             key={card.id}
@@ -88,24 +79,24 @@ export const CardGame = () => {
         ))}
       </div>
 
-      <div className="h-20 flex flex-col items-center justify-center gap-4">
+      <div className="h-24 flex flex-col items-center justify-center gap-4">
         {revealedIndex === null ? (
-          <p className="text-gold/40 text-[10px] md:text-xs uppercase tracking-[0.3em] animate-pulse">
-            Toque em uma carta para revelar
+          <p className="text-[#D4A24C]/50 font-cinzel text-[10px] uppercase tracking-[0.25em] animate-pulse">
+            TOQUE EM UMA CARTA PARA REVELAR
           </p>
         ) : (
-          <div className="flex flex-col md:flex-row gap-3 animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <div className="flex flex-col md:flex-row gap-3 animate-in fade-in duration-500 slide-in-from-bottom-2">
             <Button
-              onClick={handleReset}
+              onClick={shuffleCards}
               variant="outline"
-              className="border-gold/30 text-gold hover:bg-gold/10 font-cinzel tracking-widest uppercase text-xs"
+              className="border-[#D4A24C]/50 bg-[#D4A24C]/10 text-[#F5D37A] hover:bg-[#D4A24C]/20 font-cinzel tracking-widest uppercase text-xs rounded-full px-7 py-5"
             >
-              <RefreshCcw className="w-4 h-4 mr-2" /> Jogar Novamente
+              ✦ Jogar Novamente ✦
             </Button>
             
             {!cards[revealedIndex].isLoser && (
               <Link href="/roleta">
-                <Button className="gold-gradient-border text-obsidian font-cinzel font-bold tracking-widest uppercase text-xs aurora-btn-shadow">
+                <Button className="gold-gradient-border text-black font-cinzel font-bold tracking-widest uppercase text-xs aurora-btn-shadow rounded-full px-7 py-5">
                   Ir para a Roleta <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </Link>
@@ -114,7 +105,7 @@ export const CardGame = () => {
         )}
       </div>
 
-      <footer className="mt-auto pt-8 text-gold/20 text-[10px] uppercase tracking-[0.3em] text-center border-t border-gold/10 w-full">
+      <footer className="mt-auto pt-8 text-[#D4A24C]/20 font-cinzel text-[10px] uppercase tracking-[0.3em] text-center w-full">
         Aurora Cartomante · Todos os direitos reservados
       </footer>
     </div>
