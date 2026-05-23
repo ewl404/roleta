@@ -65,18 +65,23 @@ export const CardGame = () => {
         </div>
       </header>
 
-      <div className="grid grid-cols-3 gap-3 md:gap-4 w-full max-w-[320px] md:max-w-[400px] mb-8">
-        {cards.map((card, idx) => (
-          <TarotCard
-            key={card.id}
-            value={card.value}
-            label={card.label}
-            isLoser={card.isLoser}
-            isRevealed={revealedIndex === idx}
-            isDisabled={revealedIndex !== null && revealedIndex !== idx}
-            onClick={() => handleCardClick(idx)}
-          />
-        ))}
+      <div className="relative w-full max-w-[320px] md:max-w-[400px] mb-8">
+        {/* Leve sombra dourada de fundo */}
+        <div className="absolute inset-0 bg-[#D4A24C]/10 blur-[80px] rounded-full scale-125 -z-10 pointer-events-none" />
+        
+        <div className="grid grid-cols-3 gap-3 md:gap-4 w-full relative z-10">
+          {cards.map((card, idx) => (
+            <TarotCard
+              key={card.id}
+              value={card.value}
+              label={card.label}
+              isLoser={card.isLoser}
+              isRevealed={revealedIndex === idx}
+              isDisabled={revealedIndex !== null && revealedIndex !== idx}
+              onClick={() => handleCardClick(idx)}
+            />
+          ))}
+        </div>
       </div>
 
       <div className="h-24 flex flex-col items-center justify-center gap-4">

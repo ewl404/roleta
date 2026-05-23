@@ -56,7 +56,7 @@ export const Wheel: React.FC<WheelProps> = ({
       const endAngleRad = ((i + 1) / total) * 2 * Math.PI - Math.PI / 2;
       const midAngleRad = (startAngleRad + endAngleRad) / 2;
       
-      // midDeg sem o "+ 90" para garantir orientação RADIAL (apontando para fora)
+      // Orientação radial para o texto
       const midDeg = (midAngleRad * 180) / Math.PI;
 
       const x1 = cx + r * Math.cos(startAngleRad);
@@ -182,13 +182,18 @@ export const Wheel: React.FC<WheelProps> = ({
         {mounted && Array.from({ length: 24 }).map((_, i) => {
           const angle = (i * 360) / 24;
           const isGold = i % 2 === 0;
+          
+          // Estabilização de valores para evitar erro de hidratação
+          const posX = (50 + 48 * Math.cos((Math.PI * angle) / 180)).toFixed(2);
+          const posY = (50 + 48 * Math.sin((Math.PI * angle) / 180)).toFixed(2);
+
           return (
             <div 
               key={i}
               className={cn("absolute w-2 h-2 rounded-full -translate-x-1/2 -translate-y-1/2", isGold ? "animate-pulse" : "")}
               style={{ 
-                left: `${50 + 48 * Math.cos((Math.PI * angle) / 180)}%`,
-                top: `${50 + 48 * Math.sin((Math.PI * angle) / 180)}%`,
+                left: `${posX}%`,
+                top: `${posY}%`,
                 backgroundColor: isGold ? "#FFF4D6" : "#5C0A1A",
                 boxShadow: isGold ? "0 0 8px #FFD580, 0 0 16px rgba(255,213,128,0.6)" : "0 0 6px rgba(245,230,200,0.4)"
               }}
@@ -216,7 +221,7 @@ export const Wheel: React.FC<WheelProps> = ({
               <feDropShadow dx="0" dy="1" stdDeviation="1" floodColor="rgba(0,0,0,0.8)" />
             </filter>
           </defs>
-          {renderSegments()}
+          {mounted && renderSegments()}
         </svg>
       </div>
 
