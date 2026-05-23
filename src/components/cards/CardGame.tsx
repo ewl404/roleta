@@ -60,7 +60,7 @@ export const CardGame = () => {
         </div>
         
         <h1 className="font-cinzel text-3xl md:text-5xl text-[#F5D37A] font-black tracking-tighter text-glow-gold leading-tight drop-shadow-[0_0_10px_rgba(245,211,122,0.5)]">
-          Aurora Cartomante
+          ESCOLHA UMA CARTA
         </h1>
         
         <div className="space-y-3">
