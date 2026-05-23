@@ -10,12 +10,18 @@ import { Trophy, Dices } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const DEFAULT_SEGMENTS: WheelSegment[] = [
-  { id: '1', label: 'Pizza', weight: 1 },
-  { id: '2', label: 'Sushi', weight: 1 },
-  { id: '3', label: 'Hambúrguer', weight: 1 },
-  { id: '4', label: 'Salada', weight: 1 },
-  { id: '5', label: 'Pasta', weight: 1 },
-  { id: '6', label: 'Tacos', weight: 1 },
+  { id: '1', label: 'R$ 1.000', subLabel: 'GRANDE PRÊMIO', weight: 1, color: '#D4A24C' },
+  { id: '2', label: 'Não foi dessa vez', weight: 1, color: '#0F0608' },
+  { id: '3', label: 'R$ 50', weight: 1, color: '#5C0A1A' },
+  { id: '4', label: 'Tentar Novamente', weight: 1, color: '#3B0F1A' },
+  { id: '5', label: 'R$ 200', weight: 1, color: '#5C0A1A' },
+  { id: '6', label: 'Não foi dessa vez', weight: 1, color: '#0F0608' },
+  { id: '7', label: 'R$ 100', weight: 1, color: '#5C0A1A' },
+  { id: '8', label: 'Tentar Novamente', weight: 1, color: '#3B0F1A' },
+  { id: '9', label: 'R$ 50', weight: 1, color: '#5C0A1A' },
+  { id: '10', label: 'R$ 500', weight: 1, color: '#1A0A0A' },
+  { id: '11', label: 'R$ 100', weight: 1, color: '#5C0A1A' },
+  { id: '12', label: 'R$ 200', weight: 1, color: '#1A0A0A' },
 ];
 
 export const RouletteGame = () => {
@@ -91,11 +97,12 @@ export const RouletteGame = () => {
             />
             
             {winner && !isSpinning && (
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none animate-in fade-in zoom-in duration-500">
-                <div className="bg-obsidian/90 backdrop-blur-md border-2 border-gold rounded-2xl p-6 text-center shadow-[0_0_50px_rgba(212,175,55,0.4)]">
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-[40] animate-in fade-in zoom-in duration-500">
+                <div className="bg-obsidian/95 backdrop-blur-md border-2 border-gold rounded-2xl p-6 text-center shadow-[0_0_50px_rgba(212,175,55,0.4)] min-w-[200px]">
                   <Trophy className="w-10 h-10 text-gold mx-auto mb-2 animate-bounce" />
                   <p className="text-gold/70 text-sm uppercase tracking-widest mb-1">Resultado</p>
                   <h2 className="text-cream text-3xl font-headline font-bold">{winner.label}</h2>
+                  {winner.subLabel && <p className="text-gold/50 text-xs mt-1">{winner.subLabel}</p>}
                 </div>
               </div>
             )}

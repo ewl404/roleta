@@ -1,6 +1,7 @@
 export interface WheelSegment {
   id: string;
   label: string;
+  subLabel?: string;
   color?: string;
   weight: number;
 }
