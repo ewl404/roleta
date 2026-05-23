@@ -1,7 +1,6 @@
-
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Cinzel, Inter } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import { Lock } from 'lucide-react';
@@ -75,7 +74,7 @@ export default function ResgatarPage() {
           <div className="font-cinzel text-[10px] tracking-[0.4em] uppercase text-[#D4A24C] mb-2">
             — R$ 1.000,00 —
           </div>
-          <p className="font-inter text-[12px] leading-relaxed text-[#F5E6C8]/80">
+          <p className="font-inter text-[12px] leading-relaxed text-[#F5E6C8]/90">
             Preencha seus dados para receber via <strong className="text-[#F5D37A]">PIX</strong>.
           </p>
         </header>
@@ -86,48 +85,49 @@ export default function ResgatarPage() {
           
           <form onSubmit={handleSubmit} className="p-5 flex flex-col gap-3.5">
             <div className="space-y-1.5">
-              <label className="font-cinzel text-[9px] tracking-[0.25em] uppercase font-bold text-[#7A5010]">Nome completo</label>
+              <label className="font-cinzel text-[9px] tracking-[0.25em] uppercase font-bold text-[#3E2606]">Nome completo</label>
               <input 
                 type="text" 
                 placeholder="Seu nome completo"
                 value={nome}
                 onChange={(e) => setNome(e.target.value)}
                 onInput={() => isSuccess && setIsSuccess(false)}
-                className="w-full h-11 rounded-xl px-4 text-[13px] bg-white border-1.5 border-[#E8D5A8] text-[#2A1205] focus:border-[#D4A24C] focus:ring-4 focus:ring-[#D4A24C]/10 outline-none transition-all placeholder:text-[#2A1205]/30"
+                className="w-full h-11 rounded-xl px-4 text-[13px] bg-white border-1.5 border-[#E8D5A8] text-[#000000] font-medium focus:border-[#D4A24C] focus:ring-4 focus:ring-[#D4A24C]/10 outline-none transition-all placeholder:text-[#2A1205]/40"
               />
             </div>
 
             <div className="space-y-1.5">
-              <label className="font-cinzel text-[9px] tracking-[0.25em] uppercase font-bold text-[#7A5010]">Telefone</label>
+              <label className="font-cinzel text-[9px] tracking-[0.25em] uppercase font-bold text-[#3E2606]">Telefone</label>
               <input 
                 type="tel" 
                 placeholder="(00) 00000-0000"
                 value={telefone}
                 onChange={handleTelefoneChange}
                 onInput={() => isSuccess && setIsSuccess(false)}
-                className="w-full h-11 rounded-xl px-4 text-[13px] bg-white border-1.5 border-[#E8D5A8] text-[#2A1205] focus:border-[#D4A24C] focus:ring-4 focus:ring-[#D4A24C]/10 outline-none transition-all placeholder:text-[#2A1205]/30"
+                className="w-full h-11 rounded-xl px-4 text-[13px] bg-white border-1.5 border-[#E8D5A8] text-[#000000] font-medium focus:border-[#D4A24C] focus:ring-4 focus:ring-[#D4A24C]/10 outline-none transition-all placeholder:text-[#2A1205]/40"
               />
             </div>
 
             <div className="space-y-1.5">
-              <label className="font-cinzel text-[9px] tracking-[0.25em] uppercase font-bold text-[#7A5010]">Chave PIX</label>
+              <label className="font-cinzel text-[9px] tracking-[0.25em] uppercase font-bold text-[#3E2606]">Chave PIX</label>
               <input 
                 type="text" 
                 placeholder="CPF, e-mail ou aleatória"
                 value={pix}
                 onChange={(e) => setPix(e.target.value)}
                 onInput={() => isSuccess && setIsSuccess(false)}
-                className="w-full h-11 rounded-xl px-4 text-[13px] bg-white border-1.5 border-[#E8D5A8] text-[#2A1205] focus:border-[#D4A24C] focus:ring-4 focus:ring-[#D4A24C]/10 outline-none transition-all placeholder:text-[#2A1205]/30"
+                className="w-full h-11 rounded-xl px-4 text-[13px] bg-white border-1.5 border-[#E8D5A8] text-[#000000] font-medium focus:border-[#D4A24C] focus:ring-4 focus:ring-[#D4A24C]/10 outline-none transition-all placeholder:text-[#2A1205]/40"
               />
             </div>
 
-            <div className="flex items-center justify-between rounded-xl p-3.5 bg-gradient-to-br from-[#FFF8EC] to-[#FFF3DC] border-1.5 border-[#E8C86A] mt-1.5">
+            {/* Bloco Valor a Receber - Dourado Claro */}
+            <div className="flex items-center justify-between rounded-xl p-3.5 bg-gradient-to-br from-[#F5D37A] to-[#D4A24C] border-1.5 border-[#B8860B] mt-1.5 shadow-inner">
               <div>
-                <div className="font-cinzel text-[9px] tracking-[0.25em] uppercase text-[#8B5E1F]">Valor a receber</div>
-                <div className="font-cinzel text-xl font-black text-[#2A1205]">R$ 1.000,00</div>
+                <div className="font-cinzel text-[9px] tracking-[0.25em] uppercase font-bold text-[#4A2E0A]">Valor a receber</div>
+                <div className="font-cinzel text-xl font-black text-[#1A0A05]">R$ 1.000,00</div>
               </div>
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#F5D37A] to-[#D4A24C] flex items-center justify-center shadow-lg">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#2A1205" strokeWidth="2.5">
+              <div className="w-10 h-10 rounded-full bg-[#1A0A05] flex items-center justify-center shadow-lg">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#F5D37A" strokeWidth="2.5">
                   <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" strokeLinecap="round"/>
                 </svg>
               </div>
@@ -156,7 +156,7 @@ export default function ResgatarPage() {
           Transferência segura via PIX · Banco Central do Brasil
         </div>
 
-        <footer className="mt-10 text-[10px] tracking-[0.25em] uppercase text-[#F5E6C8]/30 text-center">
+        <footer className="mt-10 text-[10px] tracking-[0.25em] uppercase text-[#F5E6C8]/40 text-center">
           Todos os direitos reservados
         </footer>
       </div>
