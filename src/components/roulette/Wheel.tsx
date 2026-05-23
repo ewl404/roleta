@@ -60,35 +60,39 @@ export const Wheel: React.FC<WheelProps> = ({
       const path = `M ${cx} ${cy} L ${x1} ${y1} A ${radius} ${radius} 0 0 1 ${x2} ${y2} Z`;
       
       const midAngle = startAngle + segmentAngle / 2;
-      const textRadius = 160;
+      const textRadius = 150; // Posicionado radialmente
       const tx = cx + textRadius * Math.cos((Math.PI * (midAngle - 90)) / 180);
       const ty = cy + textRadius * Math.sin((Math.PI * (midAngle - 90)) / 180);
 
-      const isSpecial = segment.label.includes('1.000');
-      const isNegative = segment.label.includes('Não foi') || segment.label.includes('Tentar');
+      // Rotação radial (apontando para fora)
+      const textRotation = midAngle;
+
+      const isGrandPrize = segment.label.includes('1.000');
+      const isNegative = segment.label.includes('Não foi');
+      const isRetry = segment.label.includes('Tentar');
 
       return (
         <g key={segment.id}>
           <path d={path} fill={segment.color} stroke="#D4A24C" strokeWidth="1.5" />
           <path d={path} fill="url(#centerGradient)" opacity="0.15" />
           
-          <g transform={`translate(${tx}, ${ty}) rotate(${midAngle})`}>
-            {segment.label.includes('1.000') ? (
+          <g transform={`translate(${tx}, ${ty}) rotate(${textRotation})`}>
+            {isGrandPrize ? (
               <>
                 <text 
                   textAnchor="middle" 
-                  x="0" y="-10" 
+                  x="0" y="-8" 
                   fill="#2A0A0A" 
-                  className="font-cinzel text-[26px] font-black"
+                  className="font-cinzel text-[24px] font-black"
                   style={{ filter: 'url(#textShadow)' }}
                 >
                   R$ 1.000
                 </text>
                 <text 
                   textAnchor="middle" 
-                  x="0" y="15" 
+                  x="0" y="16" 
                   fill="#2A0A0A" 
-                  className="font-cinzel text-[9px] font-bold tracking-[0.3em]"
+                  className="font-cinzel text-[9px] font-bold tracking-[0.2em]"
                 >
                   GRANDE PRÊMIO
                 </text>
@@ -97,27 +101,48 @@ export const Wheel: React.FC<WheelProps> = ({
               <>
                 <text 
                   textAnchor="middle" 
-                  x="0" y="-5" 
-                  fill={segment.label.includes('Não foi') ? "#A88247" : "#F5E6C8"}
+                  x="0" y="-6" 
+                  fill="#A88247"
                   className="font-cinzel text-[15px] font-bold"
                   style={{ filter: 'url(#textShadow)' }}
                 >
-                  {segment.label.split(' ')[0]} {segment.label.split(' ')[1]}
+                  Não foi
                 </text>
                 <text 
                   textAnchor="middle" 
                   x="0" y="12" 
-                  fill={segment.label.includes('Não foi') ? "#A88247" : "#F5E6C8"}
+                  fill="#A88247"
                   className="font-cinzel text-[13px] font-semibold"
                   style={{ filter: 'url(#textShadow)' }}
                 >
-                  {segment.label.split(' ').slice(2).join(' ')}
+                  dessa vez
+                </text>
+              </>
+            ) : isRetry ? (
+              <>
+                <text 
+                  textAnchor="middle" 
+                  x="0" y="-6" 
+                  fill="#F5E6C8"
+                  className="font-cinzel text-[15px] font-bold"
+                  style={{ filter: 'url(#textShadow)' }}
+                >
+                  Tentar
+                </text>
+                <text 
+                  textAnchor="middle" 
+                  x="0" y="12" 
+                  fill="#F5E6C8"
+                  className="font-cinzel text-[13px] font-semibold"
+                  style={{ filter: 'url(#textShadow)' }}
+                >
+                  Novamente
                 </text>
               </>
             ) : (
               <text 
                 textAnchor="middle" 
-                x="0" y="5" 
+                x="0" y="8" 
                 fill={segment.id === '10' || segment.id === '12' ? "#D4A24C" : "#F5E6C8"}
                 className="font-cinzel text-[24px] font-black tracking-wider"
                 style={{ filter: 'url(#textShadow)' }}
