@@ -172,7 +172,7 @@ export const CardGame = () => {
       )}
 
       <footer className="mt-auto pt-8 text-[#D4A24C]/20 font-cinzel text-[10px] uppercase tracking-[0.3em] text-center w-full">
-        Aurora Cartomante · Todos os direitos reservados
+        Todos os direitos reservados
       </footer>
     </div>
   );
