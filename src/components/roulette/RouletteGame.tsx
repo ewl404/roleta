@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useRef, useCallback } from 'react';
@@ -62,7 +63,7 @@ export const RouletteGame = () => {
         </h1>
       </header>
 
-      <div className="flex flex-col items-center gap-6 md:gap-10 w-full -mt-4 md:-mt-8">
+      <div className="flex flex-col items-center gap-6 md:gap-10 w-full mt-4 md:mt-8">
         <Wheel 
           segments={AURORA_SEGMENTS} 
           onResult={onResult} 
