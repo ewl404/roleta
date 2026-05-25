@@ -5,7 +5,7 @@ import React, { useState, useRef, useCallback } from 'react';
 import { Wheel } from './Wheel';
 import { WheelSegment } from '@/lib/types';
 import { Button } from '@/components/ui/button';
-import { Star, Trophy, RefreshCcw, Wallet } from 'lucide-react';
+import { Star, Trophy, RefreshCcw, Wallet, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
 
 const AURORA_SEGMENTS: WheelSegment[] = [
@@ -23,7 +23,11 @@ const AURORA_SEGMENTS: WheelSegment[] = [
   { id: '12', label: 'R$ 200', weight: 1, color: '#1A0A0A' },
 ];
 
-export const RouletteGame = () => {
+interface RouletteGameProps {
+  variant?: 'default' | 'whatsapp';
+}
+
+export const RouletteGame = ({ variant = 'default' }: RouletteGameProps) => {
   const [isSpinning, setIsSpinning] = useState(false);
   const [winner, setWinner] = useState<WheelSegment | null>(null);
   const [spinCount, setSpinCount] = useState(0);
@@ -38,13 +42,10 @@ export const RouletteGame = () => {
 
     let targetSegmentIndex;
     if (spinCount === 0) {
-      // Primeiro giro: "Tentar Novamente" (índice 3 ou 7)
       targetSegmentIndex = 3;
     } else if (spinCount === 1) {
-      // Segundo giro: "R$ 1.000" (índice 0)
       targetSegmentIndex = 0;
     } else {
-      // Giros subsequentes: aleatório
       targetSegmentIndex = Math.floor(Math.random() * AURORA_SEGMENTS.length);
     }
 
@@ -130,17 +131,30 @@ export const RouletteGame = () => {
               </div>
               
               {winner.label.includes('1.000') ? (
-                <Link href="/resgatar" className="w-full">
-                  <Button className="w-full h-12 rounded-full gold-gradient-border text-obsidian font-cinzel font-bold uppercase tracking-widest hover:scale-105 transition-transform">
-                    <Wallet className="w-4 h-4 mr-2" /> Resgatar prêmio
-                  </Button>
-                </Link>
+                variant === 'whatsapp' ? (
+                  <div className="space-y-4 w-full">
+                    <p className="text-[#F5E6C8]/80 text-[13px] leading-relaxed px-2">
+                      Entre no grupo e descubra como participar da chance de ganhar R$ 1.000
+                    </p>
+                    <Link href="https://whatsapp.com/channel/0029Vb7RuvI05MUhbdxUc11E" target="_blank" className="w-full block">
+                      <Button className="w-full h-14 rounded-full bg-[#25D366] hover:bg-[#128C7E] text-white font-cinzel font-bold text-[13px] tracking-[0.2em] shadow-[0_4px_20px_rgba(37,211,102,0.4)] hover:scale-105 active:scale-95 transition-all uppercase border-none">
+                        <MessageCircle className="w-5 h-5 mr-2" /> Entrar no Grupo
+                      </Button>
+                    </Link>
+                  </div>
+                ) : (
+                  <Link href="/resgatar" className="w-full">
+                    <Button className="w-full h-14 rounded-full gold-gradient-border text-obsidian font-cinzel font-bold text-[13px] tracking-[0.2em] shadow-[0_4px_20px_rgba(212,175,55,0.4)] hover:scale-105 active:scale-95 transition-all uppercase">
+                      <Wallet className="w-5 h-5 mr-2" /> Resgatar prêmio
+                    </Button>
+                  </Link>
+                )
               ) : (
                 <Button 
                   onClick={() => setWinner(null)}
-                  className="w-full h-12 rounded-full gold-gradient-border text-obsidian font-cinzel font-bold uppercase tracking-widest hover:scale-105 transition-transform"
+                  className="w-full h-14 rounded-full gold-gradient-border text-obsidian font-cinzel font-bold text-[13px] tracking-[0.2em] shadow-[0_4px_20px_rgba(212,175,55,0.4)] hover:scale-105 active:scale-95 transition-all uppercase"
                 >
-                  <RefreshCcw className="w-4 h-4 mr-2" /> Jogar Novamente
+                  <RefreshCcw className="w-5 h-5 mr-2" /> Jogar Novamente
                 </Button>
               )}
             </div>

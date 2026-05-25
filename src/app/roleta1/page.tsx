@@ -1,3 +1,4 @@
+
 import { RouletteGame } from "@/components/roulette/RouletteGame";
 
 export default function Roleta1Page() {
@@ -9,7 +10,7 @@ export default function Roleta1Page() {
         <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-gold/10 rounded-full blur-[120px]" />
       </div>
       
-      <RouletteGame />
+      <RouletteGame variant="whatsapp" />
     </main>
   );
 }
