@@ -141,7 +141,7 @@ export const RouletteGame = ({ variant = 'default' }: RouletteGameProps) => {
                     <p className="text-[#F5E6C8]/80 text-[13px] leading-relaxed px-2">
                       Entre no grupo e descubra como participar da chance de ganhar R$ 1.000
                     </p>
-                    <Link href="https://whatsapp.com/channel/0029Vb7RuvI05MUhbdxUc11E" target="_blank" className="w-full block">
+                    <Link href="https://devzapp.com.br/#/dev-zap-grupos/688ab828d17fb90001128ed1" target="_blank" className="w-full block">
                       <Button className="w-full h-14 rounded-full bg-[#25D366] hover:bg-[#128C7E] text-white font-cinzel font-black text-[14px] tracking-[0.2em] shadow-[0_4px_20px_rgba(37,211,102,0.4)] hover:scale-105 active:scale-95 transition-all uppercase border-none">
                         <MessageCircle className="w-5 h-5 mr-2" /> Entrar no Grupo
                       </Button>
