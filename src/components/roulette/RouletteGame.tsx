@@ -109,8 +109,13 @@ export const RouletteGame = ({ variant = 'default' }: RouletteGameProps) => {
         </div>
       </div>
 
-      <footer className="mt-6 py-4 text-gold/20 text-[10px] uppercase tracking-[0.3em] text-center border-t border-gold/10 w-full">
-        Todos os direitos reservados
+      <footer className="mt-12 mb-8 px-4 space-y-6 text-center w-full max-w-2xl mx-auto z-10">
+        <div className="text-gold/20 text-[10px] uppercase tracking-[0.3em] border-t border-gold/10 pt-6">
+          Todos os direitos reservados
+        </div>
+        <p className="text-gold/10 text-[8px] leading-relaxed uppercase tracking-wider font-medium">
+          CONAR e Lei nº 14.790/2023 — proibido para menores de 18 anos, não há garantias de ganhos. Jogo é diversão e não investimento. Este conteúdo não é associado ao WhatsApp Inc, Facebook Inc, ou Meta. Copyright © 2026 • Ao acessar, você concorda com os Termos de Uso e Política de Privacidade
+        </p>
       </footer>
 
       {winner && !isSpinning && (

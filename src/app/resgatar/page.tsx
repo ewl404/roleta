@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -100,9 +101,9 @@ export default function ResgatarPage() {
       {flowStep === 'form' && (
         <div className="relative z-10 w-full max-w-[320px] flex flex-col items-center animate-in fade-in duration-700">
           <header className="text-center mb-6 max-w-[290px]">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#D4A24C]/45 bg-[#FEFAF4]/10 text-[#D4A24C] backdrop-blur-md mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#D4A24C]/45 bg-[#FEFAF4]/10 text-[#F5D37A] backdrop-blur-md mb-4">
               <span className="w-1 h-1 rounded-full bg-[#C49A28] animate-pulse" />
-              <span className="font-cinzel text-[9px] tracking-[0.3em] uppercase font-bold">Mapa da Sorte</span>
+              <span className="font-cinzel text-[9px] tracking-[0.3em] uppercase font-bold text-[#F5D37A]">Mapa da Sorte</span>
               <span className="w-1 h-1 rounded-full bg-[#C49A28] animate-pulse [animation-delay:1s]" />
             </div>
             
@@ -312,7 +313,7 @@ export default function ResgatarPage() {
               <div className="text-center mb-8">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#D4A24C]/30 bg-[#FFF8EC]/10 text-[#D4A24C] mb-4">
                   <Lock className="w-3 h-3" />
-                  <span className="font-cinzel text-[9px] tracking-[0.2em] uppercase font-bold">Protocolo de Liberação</span>
+                  <span className="font-cinzel text-[9px] tracking-[0.2em] uppercase font-bold text-[#F5D37A]">Protocolo de Liberação</span>
                 </div>
                 <h2 className="font-cinzel text-xl font-black text-[#2A1205] uppercase tracking-tight">Como Liberar seu Prêmio</h2>
               </div>
@@ -372,8 +373,13 @@ export default function ResgatarPage() {
         </div>
       )}
 
-      <footer className="mt-10 text-[10px] tracking-[0.25em] uppercase text-[#F5E6C8]/40 text-center">
-        Todos os direitos reservados
+      <footer className="mt-12 mb-10 px-6 space-y-6 text-center w-full max-w-2xl mx-auto">
+        <div className="text-[10px] tracking-[0.25em] uppercase text-[#F5E6C8]/40 pt-6 border-t border-[#D4A24C]/10">
+          Todos os direitos reservados
+        </div>
+        <p className="text-[#F5E6C8]/20 text-[8px] leading-relaxed uppercase tracking-wider font-medium">
+          CONAR e Lei nº 14.790/2023 — proibido para menores de 18 anos, não há garantias de ganhos. Jogo é diversão e não investimento. Este conteúdo não é associado ao WhatsApp Inc, Facebook Inc, ou Meta. Copyright © 2026 • Ao acessar, você concorda com os Termos de Uso e Política de Privacidade
+        </p>
       </footer>
 
       <style jsx global>{`

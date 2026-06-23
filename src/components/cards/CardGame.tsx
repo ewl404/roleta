@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect, useCallback } from 'react';
@@ -171,8 +172,13 @@ export const CardGame = () => {
         </div>
       )}
 
-      <footer className="mt-auto pt-8 text-[#D4A24C]/20 font-cinzel text-[10px] uppercase tracking-[0.3em] text-center w-full">
-        Todos os direitos reservados
+      <footer className="mt-auto pt-12 pb-8 px-4 space-y-6 text-center w-full max-w-2xl mx-auto">
+        <div className="text-[#D4A24C]/20 font-cinzel text-[10px] uppercase tracking-[0.3em] border-t border-[#D4A24C]/10 pt-6">
+          Todos os direitos reservados
+        </div>
+        <p className="text-[#D4A24C]/10 text-[8px] leading-relaxed uppercase tracking-wider font-medium">
+          CONAR e Lei nº 14.790/2023 — proibido para menores de 18 anos, não há garantias de ganhos. Jogo é diversão e não investimento. Este conteúdo não é associado ao WhatsApp Inc, Facebook Inc, ou Meta. Copyright © 2026 • Ao acessar, você concorda com os Termos de Uso e Política de Privacidade
+        </p>
       </footer>
     </div>
   );
