@@ -1,7 +1,7 @@
 
 import { RouletteGame } from "@/components/roulette/RouletteGame";
 
-export default function Roleta1Page() {
+export default function RoletaJosePage() {
   return (
     <main className="relative overflow-hidden min-h-screen">
       {/* Background Ambience */}
@@ -12,7 +12,7 @@ export default function Roleta1Page() {
       
       <RouletteGame 
         variant="whatsapp" 
-        whatsappLink="https://devzapp.com.br/#/dev-zap-grupos/688ab828d17fb90001128ed1"
+        whatsappLink="https://chat.whatsapp.com/DOGRvLfQsmM1uWMMdUC0wq"
       />
     </main>
   );
